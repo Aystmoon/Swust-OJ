@@ -1,0 +1,52 @@
+// 统计利用二叉树存储的森林中树的棵数
+#include<iostream>
+using namespace std;
+typedef struct BTNode//定义二叉树结构体
+{
+  char data；
+  BTNode *lchild,*rchild;
+  }BTNode;
+  void CreateTree(BTNode *&tree)//先序遍历递归法创建二叉树
+  {
+    char ch;
+    cin>>ch;
+    tree=new BTNode;//operator new的作用有点类似与C语言中的malloc，分配内存
+    if(ch=='#')//当接收的数据是字符"#"时表示该结点不需要创建
+      tree=NULL;
+     else//否则创建该结点
+     {
+        tree->data=ch;//该节点赋值为ch
+        CreateTree(tree->lchild);
+        CreateTree(tree->rchild);
+        }
+      }
+ void Forest(BTNode *tree,int &treeCount)//二叉树存储的森林中树的棵数
+      {
+          while(tree!=NULL)
+          {
+            treeCount++;
+            tree=tree->rchild;//由森林构成的二叉树一个右结点就表示一棵树
+            }
+       }
+       
+  void DestoryTree(BTNode *&tree)//销毁二叉树
+  {
+      if(tree!=NULL)//当结点不为空就销毁
+      {
+        DestoryTree(tree->lchild);
+        DestoryTree(tree->rchild);
+        delete tree;
+        }
+   }
+  
+ int main()
+ {
+  BTNode *tree;//定义tree
+  Create(tree);//先序遍历递归创建二叉树
+  int treeCount=0;//记录树的棵树
+  Forest(tree,treeCount);//调用统计树的棵树的函数
+  cout<<treeCount;//输出树的棵数
+  DestoryTree(tree);//销毁二叉树
+  return 0;
+  }
+     
