@@ -1,0 +1,49 @@
+//982: 输出利用二叉树存储的普通树的度
+#include<iostream>
+int max=0;//定义全局变量Global variables
+
+typedef struct node//定义二叉树结构体
+{
+  char data;
+  struct node *lchild,*rchild;
+  }Tree;
+  
+  void CreateTree（Tree *&tree)//先序遍历递归创建二叉树
+  {
+    char ch；
+    cin>>ch;
+    if(tree=='#')
+      tree=NULL;
+     else
+     {
+        tree=new Tree;
+        t->data=ch;
+        CreateTree(t->lchild);
+        CreateTree(t->rchild);
+        }
+      }
+ void DegreeTree(Tree *&tree,int n)//计算二叉树存储的普通树的度
+ {
+    if(tree!=NULL)
+    {
+      DegreeTree(t->rchild,n+1);
+      DegreeTree(t->lchild,1);
+      }
+      if(max<n)
+        max=n;
+  }
+  int main()
+  {
+    Tree *tree;
+    CreateTree(tree);
+    int n=0;
+    if(t->rchild==NULL)
+    {
+      Degree(tree,n);
+      cout <<max-1;
+      }
+      else
+      cout<<"ERROR";
+      return 0;
+      }
+  
